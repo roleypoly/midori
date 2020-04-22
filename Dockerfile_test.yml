@@ -1,0 +1,28 @@
+schemaVersion: '2.0.0'
+
+commandTests:
+- name: 'app test'
+  command: '/app'
+  expectedError: ['.*Starting.*', '.*Build [0-9a-f]+.*'] # /app outputs it's logs to stderr
+  exitCode: 2
+
+fileContentTests:
+- name: 'passwd'
+  path: '/etc/passwd'
+  expectedContents: ['.*nobody.*']
+- name: 'group'
+  path: '/etc/group'
+  expectedContents: ['.*nobody.*']
+
+fileExistenceTests:
+- name: 'app existence'
+  path: '/app'
+  shouldExist: true
+  isExecutableBy: 'other'
+- name: 'ca-certs'
+  path: '/etc/ssl/certs/ca-certificates.crt'
+  shouldExist: true
+
+metadataTest:
+  entrypoint: ['/app']
+  exposedPorts: ['7669', '17669']
