@@ -30,8 +30,8 @@ var (
 	ServicePort          = os.Getenv("MIDORI_SVC_PORT")
 	HealthzPort          = ":1" + os.Getenv("MIDORI_SVC_PORT")[1:]
 	Channels             = channelConfig{
-		PublicNotifications:  os.Getenv("PUBLIC_CHANNEL"),
-		PrivateNotifications: os.Getenv("PRIVATE_CHANNEL"),
+		PublicNotifications:  os.Getenv("PUBLIC_NOTIFICATIONS_CHANNEL"),
+		PrivateNotifications: os.Getenv("PRIVATE_NOTIFICATIONS_CHANNEL"),
 	}
 	TerraformCloud = tfCloudConfig{
 		Org:   os.Getenv("TFC_ORG"),
