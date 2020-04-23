@@ -3,6 +3,8 @@ github.com/bwmarrin/discordgo v0.20.1/go.mod h1:O9S4p+ofTFwB02em7jkpkV8M3R0/PUVO
 github.com/go-logr/logr v0.1.0/go.mod h1:ixOQHD9gLJUVQQ2ZOR7zLEifBX6tGkNJF4QyIY7sIas=
 github.com/gorilla/websocket v1.4.0 h1:WDFjx/TMzVgy9VdMMQi2K2Emtwi2QcUQsztZ/zLaH/Q=
 github.com/gorilla/websocket v1.4.0/go.mod h1:E7qHFY5m1UJ88s3WnNqhKjPHQ0heANvMoAMk2YaljkQ=
+github.com/joho/godotenv v1.3.0 h1:Zjp+RcGpHhGlrMbJzXTrZZPrWj+1vfm90La1wgB6Bhc=
+github.com/joho/godotenv v1.3.0/go.mod h1:7hK45KPybAkOC6peb+G5yklZfMxEjkZhHbwpqxOKXbg=
 github.com/lampjaw/discordclient v0.0.0-20191202231535-bd49e5a87cbd h1:HYF9gURU2n1E504wkIFvrAQbiDsSLmTFt0SFuC4wNx8=
 github.com/lampjaw/discordclient v0.0.0-20191202231535-bd49e5a87cbd/go.mod h1:w/s73o6mCH9nOs/X95b9nuJdtJqV2eJJtjh6tV9/Xns=
 github.com/lampjaw/discordgobot v0.4.0 h1:RUI4r26g29o/ch7N/MMzWSV1O7rjtsQ3NflKddUB3Rc=

@@ -5,7 +5,8 @@ import (
 	"os/signal"
 	"syscall"
 
-	_ "github.com/lampjaw/discordgobot"
+	"github.com/lampjaw/discordgobot"
+	botconfig "github.com/roleypoly/midori/internal/config"
 	"github.com/roleypoly/midori/internal/version"
 	"k8s.io/klog"
 )
@@ -19,6 +20,27 @@ func main() {
 	)
 
 	defer awaitExit()
+
+	if botconfig.DiscordBotToken == "" {
+		klog.Fatal("No bot token set, cannot launch.")
+		return
+	}
+
+	config := &discordgobot.GobotConf{
+		CommandPrefix: botconfig.DiscordCommandPrefix,
+	}
+
+	bot, err := discordgobot.NewBot(botconfig.DiscordBotToken, config, nil)
+	if err != nil {
+		klog.Fatal("Bot initialization failed.")
+		return
+	}
+
+	err = bot.Open()
+	if err != nil {
+		klog.Fatal("Bot start failed.")
+		return
+	}
 }
 
 func awaitExit() {
