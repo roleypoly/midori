@@ -26,9 +26,10 @@ type webhookTokens struct {
 var (
 	DiscordCommandPrefix = os.Getenv("DISCORD_COMMAND_PREFIX")
 	DiscordBotToken      = os.Getenv("DISCORD_BOT_TOKEN")
-	AuthorizedUsers      = os.Getenv("AUTHORIZED_USERS")
-	ServicePort          = os.Getenv("MIDORI_SVC_PORT")
-	HealthzPort          = ":1" + os.Getenv("MIDORI_SVC_PORT")[1:]
+	AuthorizedUsers      = strings.Split(os.Getenv("AUTHORIZED_USERS"), ",")
+	PrimaryGuild         = os.Getenv("DISCORD_PRIMARY_GUILD")
+	ServicePort          = os.Getenv("MIDORI_SVC_ADDR")
+	HealthzPort          = ":1" + os.Getenv("MIDORI_SVC_ADDR")[1:]
 	Channels             = channelConfig{
 		PublicNotifications:  os.Getenv("PUBLIC_NOTIFICATIONS_CHANNEL"),
 		PrivateNotifications: os.Getenv("PRIVATE_NOTIFICATIONS_CHANNEL"),
@@ -42,4 +43,6 @@ var (
 		TfCloud: strings.Split(os.Getenv("TFC_WEBHOOK_TOKENS"), ","),
 		Actions: strings.Split(os.Getenv("ACTIONS_WEBHOOK_TOKENS"), ","),
 	}
+	WatchdogTargets = strings.Split(os.Getenv("WATCHDOG_TARGETS"), ",")
+	WatchdogTimeout = os.Getenv("WATCHDOG_TIMEOUT")
 )

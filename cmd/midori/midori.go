@@ -1,15 +1,19 @@
 package main
 
 import (
-	"os"
-	"os/signal"
-	"syscall"
-
-	"github.com/lampjaw/discordgobot"
-	botconfig "github.com/roleypoly/midori/internal/config"
+	"github.com/roleypoly/midori/cmd/midori/run"
+	"github.com/roleypoly/midori/cmd/midori/run/watchdog"
 	"github.com/roleypoly/midori/internal/version"
+	"github.com/roleypoly/midori/webhooks"
+	"go.uber.org/fx"
 	"k8s.io/klog"
 )
+
+type klogShim struct{}
+
+func (*klogShim) Printf(format string, args ...interface{}) {
+	klog.Infof(format, args...)
+}
 
 func main() {
 	klog.Infof(
@@ -19,38 +23,19 @@ func main() {
 		version.BuildDate,
 	)
 
-	defer awaitExit()
-
-	if botconfig.DiscordBotToken == "" {
-		klog.Fatal("No bot token set, cannot launch.")
-		return
-	}
-
-	config := &discordgobot.GobotConf{
-		CommandPrefix: botconfig.DiscordCommandPrefix,
-	}
-
-	bot, err := discordgobot.NewBot(botconfig.DiscordBotToken, config, nil)
-	if err != nil {
-		klog.Fatal("Bot initialization failed.")
-		return
-	}
-
-	err = bot.Open()
-	if err != nil {
-		klog.Fatal("Bot start failed.")
-		return
-	}
-}
-
-func awaitExit() {
-	syscallExit := make(chan os.Signal, 1)
-	signal.Notify(
-		syscallExit,
-		syscall.SIGINT,
-		syscall.SIGTERM,
-		os.Interrupt,
-		os.Kill,
+	app := fx.New(
+		fx.Logger(&klogShim{}),
+		fx.Provide(
+			startBot,
+			run.NewHealthz,
+			webhooks.NewWebhookMux,
+			watchdog.NewWatchdog,
+		),
+		fx.Invoke(startHealthz),
+		fx.Invoke(startHTTP),
+		fx.Invoke(startWatchdog),
 	)
-	<-syscallExit
+
+	app.Run()
+	<-app.Done()
 }
