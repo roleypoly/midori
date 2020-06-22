@@ -3,7 +3,7 @@ module github.com/roleypoly/midori
 go 1.14
 
 require (
-	github.com/bwmarrin/discordgo v0.20.3
+	github.com/bwmarrin/discordgo v0.21.1
 	github.com/gorilla/websocket v1.4.2 // indirect
 	github.com/joho/godotenv v1.3.0
 	github.com/lampjaw/discordclient v0.0.0-20200221030325-d11dec5d1e89
