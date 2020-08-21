@@ -8,7 +8,7 @@ require (
 	github.com/joho/godotenv v1.3.0
 	github.com/lampjaw/discordclient v0.0.0-20200221030325-d11dec5d1e89
 	github.com/lampjaw/discordgobot v0.4.0
-	go.uber.org/fx v1.12.0
+	go.uber.org/fx v1.13.1
 	go.uber.org/multierr v1.5.0 // indirect
 	golang.org/x/crypto v0.0.0-20200422194213-44a606286825 // indirect
 	golang.org/x/lint v0.0.0-20200302205851-738671d3881b // indirect
